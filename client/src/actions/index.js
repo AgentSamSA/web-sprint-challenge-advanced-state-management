@@ -1,4 +1,33 @@
 import axios from 'axios';
+import Smurf from '../components/Smurf';
+
+export const FETCH_START = "FETCH_START";
+export const FETCH_SMURFS = "FETCH_SMURF";
+export const ADD_SMURF = "ADD_SMURF";
+export const FETCH_FAIL = "FETCH_FAIL";
+export const SMURF_DATA_FAIL = "SMURF_DATA_FAIL";
+
+export const getSmurfs = () => dispatch => {
+    dispatch({ type: FETCH_START });
+
+    axios
+        .get("http://localhost:3333")
+        .then(res => {
+            dispatch({ type: FETCH_SMURFS, payload: res.data });
+        })
+        .catch(err => dispatch({ type: FETCH_FAIL, payload: err }));
+}
+
+export const addSmurf = (smurfData) => dispatch => {
+    dispatch({ type: SMURF_DATA_FAIL, payload: "must include a name, nickname, and position" });
+
+    axios
+        .post("http://localhost:3333", smurfData)
+        .then(res => {
+            dispatch({ type: ADD_SMURF, payload: smurfData });
+        })
+        .catch(err => dispatch({ type: FETCH_FAIL, payload: err }));
+}
 
 //Task List:
 //1. Add fetch smurfs action: 
