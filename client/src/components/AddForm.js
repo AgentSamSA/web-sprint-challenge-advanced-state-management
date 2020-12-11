@@ -26,8 +26,6 @@ class AddForm extends React.Component {
         event.preventDefault();
         if (this.state.name && this.state.position && this.state.nickname) {
             this.props.addSmurf(this.state);
-            this.props.getSmurfs();
-            console.log(this.props.smurfs);
             this.setState({
                 name: "",
                 position: "",
