@@ -14,7 +14,17 @@ export const reducer = (state = initialState, action) => {
             console.log(action.payload);
             return ({ ...state, smurfs: action.payload, isLoading: false });
         case (ADD_SMURF):
-            return ({ ...state, smurfs: [...state.smurfs, action.payload], isLoading: false });
+            return ({
+                ...state, smurfs: [...state.smurfs,
+                {
+                    name: action.payload.name,
+                    position: action.payload.position,
+                    nickname: action.payload.nickname,
+                    description: action.payload.description
+                }
+                ],
+                isLoading: false
+            });
         case (FETCH_FAIL):
             return ({ ...state, isLoading: false, error: action.payload });
         case (SMURF_DATA_FAIL):
